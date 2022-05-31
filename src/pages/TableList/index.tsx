@@ -1,4 +1,4 @@
-import { addRule, removeRule, rule, updateRule } from '@/apis/memer/api';
+import { addRule, removeRule, rule, updateRule } from '@/api/request/member/api';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import ProDescriptions from '@ant-design/pro-descriptions';

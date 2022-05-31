@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
-import { login } from '@/apis/memer/api';
-import { getFakeCaptcha } from '@/apis/memer/login';
+import { login } from '@/api/request/member/api';
+import { getFakeCaptcha } from '@/api/request/member/login';
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -77,7 +77,7 @@ const Login: React.FC = () => {
         <LoginForm
           logo={<img alt="logo" src="/logo.svg" />}
           title="Ant Design"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          subTitle={'3G WEB 666'}
           initialValues={{
             autoLogin: true,
           }}

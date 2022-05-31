@@ -1,4 +1,4 @@
-import { outLogin } from '@/apis/memer/api';
+import { outLogin } from '@/api/request/member/api';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import { stringify } from 'querystring';
