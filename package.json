@@ -27,7 +27,9 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
   "husky": {
     "hooks": {
@@ -35,7 +37,11 @@
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
     }
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-card": "^1.19.0",
@@ -88,7 +94,7 @@
     "stylelint": "^13.0.0",
     "swagger-ui-react": "^4.11.1",
     "typescript": "^4.5.0",
-    "umi-serve": "^1.9.10"
+    "umi-serve": "^1.9.11"
   },
   "engines": {
     "node": ">=12.0.0"
