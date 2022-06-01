@@ -19,6 +19,7 @@ export default [
       { component: './404' },
     ],
   },
+  { name: 'wiki', icon: 'table', path: '/New', component: './NewPage' },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   { path: '/', redirect: '/welcome' },
   { component: './404' },

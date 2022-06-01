@@ -1,4 +1,4 @@
-import { getNotices } from '@/apis/memer/api';
+import { getNotices } from '@/api/request/member/api';
 import { message, Tag } from 'antd';
 import { groupBy } from 'lodash';
 import moment from 'moment';
