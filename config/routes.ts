@@ -19,7 +19,16 @@ export default [
       { component: './404' },
     ],
   },
-  { name: 'wiki', icon: 'table', path: '/New', component: './NewPage' },
+  {
+    path: '/wiki',
+    name: 'wiki管理',
+    icon: 'crown',
+    component: './Newpage',
+    routes: [
+      { path: '/wiki/sub-page', name: '二级管理页', icon: 'smile', component: './Welcome' },
+      { component: './404' },
+    ],
+  },
   { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   { path: '/', redirect: '/welcome' },
   { component: './404' },

@@ -1,4 +1,4 @@
-import { GithubOutlined } from '@ant-design/icons';
+import { AndroidOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
 
 const Footer: React.FC = () => {
@@ -10,13 +10,13 @@ const Footer: React.FC = () => {
       links={[
         {
           key: 'Ant Design Pro',
-          title: 'Ant Design Pro',
-          href: 'https://pro.ant.design',
+          title: '移动开发移动应用实验室',
+          href: 'https://mobile.xupt.edu.cn/',
           blankTarget: true,
         },
         {
           key: 'github',
-          title: <GithubOutlined />,
+          title: <AndroidOutlined />,
           href: 'https://github.com/ant-design/ant-design-pro',
           blankTarget: true,
         },
