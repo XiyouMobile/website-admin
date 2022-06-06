@@ -52,6 +52,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
+    iconfontUrl: '//at.alicdn.com/t/font_2810286_o8wls0d8w9.js',
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
@@ -101,12 +102,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ...initialState?.settings,
   };
 };
-export const request: RequestConfig={
-  'timeout':1000,
-  'responseInterceptors':[
-    (res)=>{
+export const request: RequestConfig = {
+  timeout: 1000,
+  responseInterceptors: [
+    (res) => {
       //TODO 鉴权.
       return res;
-    }
-  ]
-}
+    },
+  ],
+};
