@@ -92,7 +92,7 @@ export default [
       { component: './404' },
     ],
   },
-  { path: '/mine', name: '个人中心', icon: 'heart', component: './Newpage' },
+  { path: '/mine', name: '个人中心', icon: 'heart', component: './user/Myself/Myself' },
   {
     name: '设置',
     icon: 'setting',

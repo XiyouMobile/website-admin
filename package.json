@@ -7,7 +7,7 @@
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
     "deploy": "npm run build && npm run gh-pages",
-    "start":"cross-env APP_TYPE=site umi dev --port=8000",
+    "start":"cross-env APP_TYPE=site umi dev --port=8001",
     "start:no-mock":"cross-env MOCK=none umi dev",
     "gh-pages": "gh-pages -d dist",
     "postinstall": "umi g tmp",
