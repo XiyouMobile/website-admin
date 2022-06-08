@@ -2,7 +2,7 @@ import { AndroidOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-layout';
 
 const Footer: React.FC = () => {
-  const defaultMessage = '蚂蚁集团体验技术部出品';
+  const defaultMessage = 'WEB组黄欲烈测试中';
   const currentYear = new Date().getFullYear();
   return (
     <DefaultFooter
@@ -17,13 +17,13 @@ const Footer: React.FC = () => {
         {
           key: 'github',
           title: <AndroidOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/XiyouMobile/website-admin',
           blankTarget: true,
         },
         {
           key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          title: '3G',
+          href: 'https://mobile.xupt.edu.cn/',
           blankTarget: true,
         },
       ]}
