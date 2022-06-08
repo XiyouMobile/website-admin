@@ -37,6 +37,8 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (userInfo) {
+      console.log(userInfo);
+
       await setInitialState((s) => ({ ...s, currentUser: userInfo }));
     }
   };
@@ -75,9 +77,9 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
-          subTitle={'3G WEB 666'}
+          logo={<img alt="logo" src="/icons/logo.png" />}
+          title="移动开发应用实验室"
+          subTitle={'3G'}
           initialValues={{
             autoLogin: true,
           }}

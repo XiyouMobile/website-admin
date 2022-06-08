@@ -52,7 +52,6 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    iconfontUrl: '//at.alicdn.com/t/font_2810286_o8wls0d8w9.js',
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
@@ -75,6 +74,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         ]
       : [],
     menuHeaderRender: undefined,
+
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
@@ -99,11 +99,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         </>
       );
     },
+    iconfontUrl: '//at.alicdn.com/t/font_2810286_o8wls0d8w9.js',
     ...initialState?.settings,
   };
 };
 export const request: RequestConfig = {
-  timeout: 1000,
   responseInterceptors: [
     (res) => {
       //TODO 鉴权.
