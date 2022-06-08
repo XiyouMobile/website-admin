@@ -37,8 +37,7 @@ const Login: React.FC = () => {
     const userInfo = await initialState?.fetchUserInfo?.();
 
     if (userInfo) {
-      console.log(userInfo);
-
+      // console.log(userInfo);
       await setInitialState((s) => ({ ...s, currentUser: userInfo }));
     }
   };
@@ -53,6 +52,7 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         /** 此方法会跳转到 redirect 参数所在的位置 */
+        console.log(history);
 
         if (!history) return;
         const { query } = history.location;
