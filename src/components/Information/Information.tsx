@@ -19,31 +19,50 @@ const Information: React.FC = () => {
       />
       <div className="name">黄欲烈</div>
       <div className="sign">大佬尽在我身边</div>
-      <div className="information_label">
+      <div className="information_label1">
         <div className="information_s">
           <div className="information_label">
-            <DingtalkOutlined />
-            组别:web
+            <div>
+              <DingtalkOutlined />
+              组别:
+            </div>
+            <div>web</div>
           </div>
           <div className="information_label">
-            <DingtalkOutlined />
-            入学年:2020
+            <div>
+              <DingtalkOutlined />
+              入学年:
+            </div>
+            <div>2020</div>
           </div>
           <div className="information_label">
-            <DingtalkOutlined />
-            毕业去向:无
+            <div>
+              <DingtalkOutlined />
+              毕业去向:
+            </div>
+            <div>暂无</div>
           </div>
           <div className="information_label">
-            <DingtalkOutlined />
-            电话号码:19991396321
+            <div>
+              {' '}
+              <DingtalkOutlined />
+              电话号码:
+            </div>
+            <div>19991396321</div>
           </div>
           <div className="information_label">
-            <DingtalkOutlined />
-            一共发了:1篇wiki
+            <div>
+              <DingtalkOutlined />
+              一共发了:
+            </div>
+            <div> 1篇wiki</div>
           </div>
           <div className="information_label">
-            <DingtalkOutlined />
-            一共发了:1篇面经
+            <div>
+              <DingtalkOutlined />
+              一共发了:
+            </div>
+            <div> 1篇面经</div>
           </div>
         </div>
       </div>
