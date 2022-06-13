@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Newpage: React.FC = () => {
-  return <div>kjgkjgjkggjkgjk</div>;
+  return <div>kjgkjgjkggjkgwqewqewqewqewqjk</div>;
 };
 
 export default Newpage;
