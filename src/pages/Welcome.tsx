@@ -52,6 +52,7 @@ const Welcome: React.FC = () => {
           </a>
         </Typography.Text>
         <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
+        <CodePreview>欢迎使用移动开发应用实验室管理端</CodePreview>
       </Card>
     </PageContainer>
   );

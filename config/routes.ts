@@ -86,7 +86,7 @@ export default [
     icon: 'user',
     path: '/member',
     routes: [
-      { path: 'info', name: '捐款信息', icon: 'smile', component: './Newpage' },
+      { path: 'info', name: '捐款信息', icon: 'smile', component: './user/Money/Money' },
       { path: 'list', name: '成员列表', icon: 'smile', component: './user/UserList/UserList' },
       { component: './404' },
     ],

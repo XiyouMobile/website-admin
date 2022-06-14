@@ -1,7 +1,7 @@
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
-import { Button, Dropdown, Menu, Space, Tag } from 'antd';
+import { Button, Space, Tag } from 'antd';
 import { useRef } from 'react';
 import request from 'umi-request';
 
@@ -28,8 +28,8 @@ const columns: ProColumns<GithubIssueItem>[] = [
     width: 48,
   },
   {
-    title: '标题',
-    dataIndex: 'title',
+    title: '用户',
+    dataIndex: 'user',
     copyable: true,
     ellipsis: true,
     tip: '标题过长会自动收缩',
@@ -44,25 +44,28 @@ const columns: ProColumns<GithubIssueItem>[] = [
   },
   {
     disable: true,
-    title: '状态',
-    dataIndex: 'state',
+    title: '组别',
+    dataIndex: 'group',
     filters: true,
     onFilter: true,
     valueType: 'select',
     valueEnum: {
       all: { text: '全部', status: 'Default' },
-      open: {
-        text: '未解决',
-        status: 'Error',
+      Web: {
+        text: '前端',
+        status: 'Web',
       },
-      closed: {
-        text: '已解决',
-        status: 'Success',
-        disabled: true,
+      Serve: {
+        text: '后台',
+        status: 'Serve',
       },
-      processing: {
-        text: '解决中',
-        status: 'Processing',
+      iOS: {
+        text: 'iOS',
+        status: 'iOS',
+      },
+      Android: {
+        text: 'Android',
+        status: 'Android',
       },
     },
   },
@@ -134,14 +137,6 @@ const columns: ProColumns<GithubIssueItem>[] = [
   },
 ];
 
-const menu = (
-  <Menu>
-    <Menu.Item key="1">1st item</Menu.Item>
-    <Menu.Item key="2">2nd item</Menu.Item>
-    <Menu.Item key="3">3rd item</Menu.Item>
-  </Menu>
-);
-
 export default () => {
   const actionRef = useRef<ActionType>();
   return (
@@ -151,11 +146,14 @@ export default () => {
       cardBordered
       request={async (params = {}, sort, filter) => {
         console.log(sort, filter);
-        return request<{
+        const data = await request<{
           data: GithubIssueItem[];
         }>('https://proapi.azurewebsites.net/github/issues', {
           params,
         });
+        console.log(data);
+
+        return data;
       }}
       editable={{
         type: 'multiple',
@@ -188,16 +186,11 @@ export default () => {
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
-      headerTitle="高级表格"
+      headerTitle="成员列表"
       toolBarRender={() => [
         <Button key="button" icon={<PlusOutlined />} type="primary">
           新建
         </Button>,
-        <Dropdown key="menu" overlay={menu}>
-          <Button>
-            <EllipsisOutlined />
-          </Button>
-        </Dropdown>,
       ]}
     />
   );
