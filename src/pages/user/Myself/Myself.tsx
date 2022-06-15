@@ -3,6 +3,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { ProCard } from '@ant-design/pro-components';
 import Information from '../../../components/Information/Information';
 import { Image } from 'antd';
+import Line from './Line';
 import './Myself.less';
 
 const NewPage: React.FC = () => {
@@ -21,7 +22,9 @@ const NewPage: React.FC = () => {
           }}
         >
           <ProCard.TabPane key="tab1" tab="wiki统计">
-            内容一
+            <div className="pie">
+              <Line />
+            </div>
           </ProCard.TabPane>
           <ProCard.TabPane key="tab2" tab="面经统计">
             内容二
