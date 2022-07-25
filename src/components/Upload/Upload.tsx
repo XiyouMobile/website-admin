@@ -9,7 +9,7 @@ const App: React.FC = () => {
       uid: '-1',
       name: 'image.png',
       status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      url: 'http://xiyoustudent.cn:4000/img/img-1653223987608.jpg',
     },
   ]);
   console.log(fileList);
@@ -43,7 +43,7 @@ const App: React.FC = () => {
         onPreview={onPreview}
         name="img"
       >
-        {fileList.length < 5 && '+ Upload'}
+        {fileList.length < 1 && '+ Upload'}
       </Upload>
     </ImgCrop>
   );

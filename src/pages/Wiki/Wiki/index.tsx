@@ -1,20 +1,22 @@
 import { useRef, useState } from 'react';
-import { Form, Input, message, Modal, Radio } from 'antd';
+import { Form, Input, message, Modal, Radio, Button, Upload } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import MdEditor from 'md-editor-rt';
+import ImgCrop from 'antd-img-crop';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import axios from 'axios';
-import EmojiExtension from '../../components/EmojiExtension/index';
-import ReadExtension from '../../components/ReadExtension/index';
+import EmojiExtension from '../../../components/EmojiExtension/index';
+import ReadExtension from '../../../components/ReadExtension/index';
 import type { RadioChangeEvent } from 'antd';
-import Upload from '../../components/Upload/Upload';
 import 'md-editor-rt/lib/style.css';
-import './wiki.less';
+import './index.less';
 
 interface IFrom {
   text: string;
   type: string;
   des: string;
   articleName: string;
+  imgUrl: string;
 }
 
 const Wiki: React.FC = (): React.ReactElement => {
@@ -28,6 +30,15 @@ const Wiki: React.FC = (): React.ReactElement => {
   const [text, setText] = useState('hello md-editor-rt');
   const [type, setType] = useState('Web');
   const [des, setDes] = useState('无');
+  const [fileList, setFileList] = useState<UploadFile[]>([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: 'http://xiyoustudent.cn:4000/img/img-1653223987608.jpg',
+    },
+  ]);
+  const [flag, setFlag] = useState(true);
 
   const onFinish = (values: any) => {
     const data: IFrom = {
@@ -35,7 +46,14 @@ const Wiki: React.FC = (): React.ReactElement => {
       text: text,
       type: type,
       des: des,
+      imgUrl: 'http://xiyoustudent.cn:4000/img/img-1653223987608.jpg',
     };
+    if (flag) {
+      console.log('提交');
+    } else {
+      console.log('草稿');
+    }
+    message.success('提交成功');
     console.log('Success:', data);
   };
 
@@ -52,6 +70,14 @@ const Wiki: React.FC = (): React.ReactElement => {
 
   const handleOk = () => {
     setText(text);
+    setFlag(true);
+    FormRef.current!.submit();
+    setIsModalVisible(false);
+  };
+
+  const handleDraft = () => {
+    setText(text);
+    setFlag(false);
     FormRef.current!.submit();
     setIsModalVisible(false);
   };
@@ -66,11 +92,8 @@ const Wiki: React.FC = (): React.ReactElement => {
 
   const onChangeText = (e: any) => {
     setDes(e.target.value);
-    console.log(e.target.value);
   };
-  const onHtmlChanged = (h: string) => {
-    console.log(h);
-  };
+
   // 图片上传
   const onUploadImg = async (files: any, callback: any) => {
     const res = await Promise.all(
@@ -98,6 +121,25 @@ const Wiki: React.FC = (): React.ReactElement => {
     );
   };
 
+  const onChangeimg: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file: UploadFile) => {
+    let src = file.url as string;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj as RcFile);
+        reader.onload = () => resolve(reader.result as string);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
+
   return (
     <PageHeaderWrapper>
       <Form
@@ -109,8 +151,10 @@ const Wiki: React.FC = (): React.ReactElement => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <div onClick={showModal}>Submit</div>
+        <Form.Item>
+          <Button size="large" id="wiki_button" onClick={showModal}>
+            发布
+          </Button>
         </Form.Item>
         <Form.Item
           label="文章标题"
@@ -126,9 +170,6 @@ const Wiki: React.FC = (): React.ReactElement => {
               modelValue={text}
               onChange={(value) => setText(value)}
               editorId={editorId}
-              onHtmlChanged={(h: string) => {
-                onHtmlChanged(h);
-              }}
               previewTheme="cyanosis"
               defToolbars={[
                 <EmojiExtension
@@ -175,7 +216,21 @@ const Wiki: React.FC = (): React.ReactElement => {
           </Form.Item>
         </Form.Item>
       </Form>
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal
+        title="文章发布"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="发布"
+        footer={
+          <>
+            <Button onClick={handleDraft}>存至草稿箱</Button>
+            <Button onClick={handleOk} type="primary">
+              发布
+            </Button>
+          </>
+        }
+      >
         文章类型：
         <br />
         <Radio.Group onChange={onChange} defaultValue="Web">
@@ -186,12 +241,23 @@ const Wiki: React.FC = (): React.ReactElement => {
         </Radio.Group>
         <br />
         封面:
-        <Upload />
+        <ImgCrop rotate>
+          <Upload
+            action="http://150.158.23.19:4000/img/upload"
+            listType="picture-card"
+            fileList={fileList}
+            onChange={onChangeimg}
+            onPreview={onPreview}
+            name="img"
+          >
+            {fileList.length < 1 && '+ Upload'}
+          </Upload>
+        </ImgCrop>
         <br />
         描述:
         <Input placeholder="不多于100个字" onChange={onChangeText} />
       </Modal>
-      <MdEditor previewOnly modelValue={text} previewTheme="cyanosis" className="md" />
+      {/* <MdEditor previewOnly modelValue={text} previewTheme="cyanosis" className="md5" /> */}
     </PageHeaderWrapper>
   );
 };
