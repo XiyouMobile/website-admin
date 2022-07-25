@@ -1,17 +1,9 @@
 import React from 'react';
 import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { ProList } from '@ant-design/pro-components';
 import { Button, Tag } from 'antd';
 import './index.less';
-
-const IconText = ({ icon, text }: { icon: any; text: string }) => (
-  <span>
-    {React.createElement(icon, { style: { marginRight: 8 } })}
-    {text}
-  </span>
-);
 
 const dataSource = [
   {
@@ -58,7 +50,7 @@ const Draft: React.FC = (): React.ReactElement => {
   };
 
   const handle = (e: any) => {
-    const { id } = e.props.record;
+    const { id } = e;
     history.push(`/wiki/draft/id=${id}`);
   };
 
@@ -83,6 +75,13 @@ const Draft: React.FC = (): React.ReactElement => {
         rowKey="id"
         headerTitle="我的草稿"
         dataSource={dataSource}
+        onItem={(record: any) => {
+          return {
+            onClick: () => {
+              handle(record);
+            },
+          };
+        }}
         metas={{
           title: {},
           description: {
@@ -92,24 +91,6 @@ const Draft: React.FC = (): React.ReactElement => {
                 <Tag>{item.group}</Tag>
               </>
             ),
-          },
-          actions: {
-            render: (item: any) => {
-              const { stars, favorites, comments } = item.props.text;
-              return (
-                <>
-                  <IconText icon={StarOutlined} text={stars} key="list-vertical-star-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={LikeOutlined} text={favorites} key="list-vertical-like-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={MessageOutlined} text={comments} key="list-vertical-message" />
-                  &nbsp; &nbsp; &nbsp;
-                  <Button className="wiki_draft" onClick={() => handle(item)}>
-                    查看详情
-                  </Button>
-                </>
-              );
-            },
           },
           extra: {
             render: (item: { name: string; imgUrl: string }) => {

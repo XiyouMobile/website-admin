@@ -8,6 +8,7 @@ import axios from 'axios';
 import EmojiExtension from '../../../components/EmojiExtension/index';
 import ReadExtension from '../../../components/ReadExtension/index';
 import type { RadioChangeEvent } from 'antd';
+import moment from 'moment';
 import 'md-editor-rt/lib/style.css';
 import './index.less';
 
@@ -47,6 +48,7 @@ const Wiki: React.FC = (): React.ReactElement => {
       type: type,
       des: des,
       imgUrl: 'http://xiyoustudent.cn:4000/img/img-1653223987608.jpg',
+      date: moment().format('YYYY年MM月DD日 HH:mm:ss'),
     };
     if (flag) {
       console.log('提交');
