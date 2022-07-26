@@ -1,17 +1,10 @@
 import React from 'react';
 import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { ProList } from '@ant-design/pro-components';
-import { Button, Tag } from 'antd';
+import { Button, Tag, notification } from 'antd';
 import './index.less';
 
-const IconText = ({ icon, text }: { icon: any; text: string }) => (
-  <span>
-    {React.createElement(icon, { style: { marginRight: 8 } })}
-    {text}
-  </span>
-);
 const dataSource = [
   {
     id: '1331',
@@ -24,12 +17,7 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已发布',
-    },
-    actions: {
-      stars: 5,
-      favorites: 7,
-      comments: 8,
+      state: '未通过审核',
     },
   },
   {
@@ -43,7 +31,7 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已发布',
+      state: '未通过审核',
     },
     actions: {
       stars: 5,
@@ -58,9 +46,19 @@ const Reject: React.FC = (): React.ReactElement => {
     history.push('/wiki/create');
   };
 
-  const handle = (e: any) => {
+  const openNotification = (e: any) => {
     const { id } = e;
-    history.push(`/wiki/publish/id=${id}`);
+    console.log(id);
+
+    const args = {
+      message: `审核人:${'黄欲烈'}`,
+      description: `写的太垃圾了`,
+      btn: <Button>点击返回编辑</Button>,
+      onClick: () => {
+        history.push(`/wiki/nopass/id=${id}`);
+      },
+    };
+    notification.open(args);
   };
 
   return (
@@ -87,7 +85,7 @@ const Reject: React.FC = (): React.ReactElement => {
         onItem={(record: any) => {
           return {
             onClick: () => {
-              handle(record);
+              openNotification(record);
             },
           };
         }}
@@ -98,24 +96,9 @@ const Reject: React.FC = (): React.ReactElement => {
               <>
                 <Tag>{item.username}</Tag>
                 <Tag>{item.group}</Tag>
-                <Tag color="green">{item.state}</Tag>
+                <Tag color="magenta">{item.state}</Tag>
               </>
             ),
-          },
-          actions: {
-            render: (item: any) => {
-              const { stars, favorites, comments } = item.props.text;
-              return (
-                <>
-                  <IconText icon={StarOutlined} text={stars} key="list-vertical-star-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={LikeOutlined} text={favorites} key="list-vertical-like-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={MessageOutlined} text={comments} key="list-vertical-message" />
-                  &nbsp; &nbsp; &nbsp;
-                </>
-              );
-            },
           },
           extra: {
             render: (item: { name: string; imgUrl: string }) => {
