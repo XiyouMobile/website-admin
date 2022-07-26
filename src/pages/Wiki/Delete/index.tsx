@@ -1,17 +1,11 @@
 import React from 'react';
 import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+
 import { ProList } from '@ant-design/pro-components';
 import { Button, Tag } from 'antd';
 import './index.less';
 
-const IconText = ({ icon, text }: { icon: any; text: string }) => (
-  <span>
-    {React.createElement(icon, { style: { marginRight: 8 } })}
-    {text}
-  </span>
-);
 const dataSource = [
   {
     id: '1331',
@@ -24,12 +18,7 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已发布',
-    },
-    actions: {
-      stars: 5,
-      favorites: 7,
-      comments: 8,
+      state: '已删除',
     },
   },
   {
@@ -43,7 +32,7 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已发布',
+      state: '已删除',
     },
     actions: {
       stars: 5,
@@ -60,7 +49,7 @@ const Reject: React.FC = (): React.ReactElement => {
 
   const handle = (e: any) => {
     const { id } = e;
-    history.push(`/wiki/publish/id=${id}`);
+    history.push(`/wiki/delete/id=${id}`);
   };
 
   return (
@@ -98,24 +87,9 @@ const Reject: React.FC = (): React.ReactElement => {
               <>
                 <Tag>{item.username}</Tag>
                 <Tag>{item.group}</Tag>
-                <Tag color="green">{item.state}</Tag>
+                <Tag color="red">{item.state}</Tag>
               </>
             ),
-          },
-          actions: {
-            render: (item: any) => {
-              const { stars, favorites, comments } = item.props.text;
-              return (
-                <>
-                  <IconText icon={StarOutlined} text={stars} key="list-vertical-star-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={LikeOutlined} text={favorites} key="list-vertical-like-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={MessageOutlined} text={comments} key="list-vertical-message" />
-                  &nbsp; &nbsp; &nbsp;
-                </>
-              );
-            },
           },
           extra: {
             render: (item: { name: string; imgUrl: string }) => {
