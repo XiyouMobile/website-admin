@@ -143,9 +143,8 @@ export default [
     name: '设置',
     icon: 'setting',
     path: '/setting',
-    component: './Newpage',
     routes: [
-      { path: 'modify', name: '个人设置', icon: 'smile', component: './Newpage' },
+      { path: 'modify', name: '个人设置', icon: 'smile', component: './setting/index' },
       { component: './404' },
     ],
   },

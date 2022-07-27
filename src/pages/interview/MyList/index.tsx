@@ -1,6 +1,7 @@
 import { ProList } from '@ant-design/pro-components';
 import { Button, Space, Tag } from 'antd';
 import { history } from 'umi';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 const dataSource = [
   {
@@ -34,50 +35,52 @@ const handle = () => {
 };
 
 export default () => (
-  <ProList<any>
-    toolBarRender={() => {
-      return [
-        <Button key="add" type="primary" onClick={handle}>
-          新建
-        </Button>,
-      ];
-    }}
-    onRow={(record: any) => {
-      return {
-        onMouseEnter: () => {
-          console.log(record);
+  <PageHeaderWrapper>
+    <ProList<any>
+      toolBarRender={() => {
+        return [
+          <Button key="add" type="primary" onClick={handle}>
+            新建
+          </Button>,
+        ];
+      }}
+      onRow={(record: any) => {
+        return {
+          onMouseEnter: () => {
+            console.log(record);
+          },
+          onClick: () => {
+            console.log(record);
+          },
+        };
+      }}
+      rowKey="name"
+      headerTitle="基础列表"
+      tooltip="基础列表的配置"
+      dataSource={dataSource}
+      showActions="hover"
+      showExtra="hover"
+      metas={{
+        title: {
+          dataIndex: 'name',
         },
-        onClick: () => {
-          console.log(record);
+        avatar: {
+          dataIndex: 'image',
         },
-      };
-    }}
-    rowKey="name"
-    headerTitle="基础列表"
-    tooltip="基础列表的配置"
-    dataSource={dataSource}
-    showActions="hover"
-    showExtra="hover"
-    metas={{
-      title: {
-        dataIndex: 'name',
-      },
-      avatar: {
-        dataIndex: 'image',
-      },
-      description: {
-        dataIndex: 'desc',
-      },
-      subTitle: {
-        render: () => {
-          return (
-            <Space size={0}>
-              <Tag color="blue">Ant Design</Tag>
-              <Tag color="#5BD8A6">TechUI</Tag>
-            </Space>
-          );
+        description: {
+          dataIndex: 'desc',
         },
-      },
-    }}
-  />
+        subTitle: {
+          render: () => {
+            return (
+              <Space size={0}>
+                <Tag color="blue">Ant Design</Tag>
+                <Tag color="#5BD8A6">TechUI</Tag>
+              </Space>
+            );
+          },
+        },
+      }}
+    />
+  </PageHeaderWrapper>
 );
