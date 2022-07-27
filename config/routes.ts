@@ -128,6 +128,13 @@ export default [
     routes: [
       { path: 'info', name: '捐款信息', icon: 'smile', component: './user/Money/Money' },
       { path: 'list', name: '成员列表', icon: 'smile', component: './user/UserList/UserList' },
+      {
+        path: 'list/:id',
+        name: '成员详情',
+        icon: 'smile',
+        component: './user/OtherList/index',
+        hideInMenu: true,
+      },
       { component: './404' },
     ],
   },
