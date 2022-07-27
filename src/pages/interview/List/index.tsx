@@ -3,6 +3,7 @@ import { Button, Space, Tag } from 'antd';
 import { history } from 'umi';
 import request from 'umi-request';
 import './index.less';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 type GithubIssueItem = {
   url: string;
@@ -29,90 +30,92 @@ const handleNew = () => {
 };
 
 export default () => (
-  <ProList<GithubIssueItem>
-    split={true}
-    toolBarRender={() => {
-      return [
-        <Button key="3" type="primary" onClick={handleNew}>
-          新建
-        </Button>,
-      ];
-    }}
-    search={{
-      filterType: 'light',
-    }}
-    onItem={(record: any) => {
-      return {
-        onClick: () => {
-          handle(record);
+  <PageHeaderWrapper>
+    <ProList<GithubIssueItem>
+      split={true}
+      toolBarRender={() => {
+        return [
+          <Button key="3" type="primary" onClick={handleNew}>
+            新建
+          </Button>,
+        ];
+      }}
+      search={{
+        filterType: 'light',
+      }}
+      onItem={(record: any) => {
+        return {
+          onClick: () => {
+            handle(record);
+          },
+        };
+      }}
+      rowKey="id"
+      headerTitle="面经列表"
+      request={async (params = {}) =>
+        request<{
+          data: GithubIssueItem[];
+        }>('https://proapi.azurewebsites.net/github/issues', {
+          params,
+        })
+      }
+      pagination={{
+        pageSize: 10,
+      }}
+      showActions="hover"
+      metas={{
+        title: {
+          dataIndex: 'user',
+          title: '用户',
         },
-      };
-    }}
-    rowKey="id"
-    headerTitle="面经列表"
-    request={async (params = {}) =>
-      request<{
-        data: GithubIssueItem[];
-      }>('https://proapi.azurewebsites.net/github/issues', {
-        params,
-      })
-    }
-    pagination={{
-      pageSize: 10,
-    }}
-    showActions="hover"
-    metas={{
-      title: {
-        dataIndex: 'user',
-        title: '用户',
-      },
-      avatar: {
-        dataIndex: 'avatar',
-        search: false,
-      },
-      description: {
-        dataIndex: 'title',
-        search: false,
-      },
-      subTitle: {
-        dataIndex: 'labels',
-        render: (_, row) => {
-          return (
-            <Space size={0}>
-              {row.labels?.map((label: { name: string }) => (
-                <Tag color="blue" key={label.name}>
-                  {label.name}
-                </Tag>
-              ))}
-            </Space>
-          );
+        avatar: {
+          dataIndex: 'avatar',
+          search: false,
         },
-        search: false,
-      },
-      status: {
-        // 自己扩展的字段，主要用于筛选，不在列表中显示
-        title: '组别',
-        valueType: 'select',
-        valueEnum: {
-          all: { text: '全部', status: 'Default' },
-          Web: {
-            text: 'Web',
-            status: 'Web',
+        description: {
+          dataIndex: 'title',
+          search: false,
+        },
+        subTitle: {
+          dataIndex: 'labels',
+          render: (_, row) => {
+            return (
+              <Space size={0}>
+                {row.labels?.map((label: { name: string }) => (
+                  <Tag color="blue" key={label.name}>
+                    {label.name}
+                  </Tag>
+                ))}
+              </Space>
+            );
           },
-          Server: {
-            text: 'Server',
-            status: 'Server',
-          },
-          Android: {
-            text: 'Android',
-            status: 'Android',
-          },
-          iOS: {
-            text: 'iOS',
-            status: 'iOS',
+          search: false,
+        },
+        status: {
+          // 自己扩展的字段，主要用于筛选，不在列表中显示
+          title: '组别',
+          valueType: 'select',
+          valueEnum: {
+            all: { text: '全部', status: 'Default' },
+            Web: {
+              text: 'Web',
+              status: 'Web',
+            },
+            Server: {
+              text: 'Server',
+              status: 'Server',
+            },
+            Android: {
+              text: 'Android',
+              status: 'Android',
+            },
+            iOS: {
+              text: 'iOS',
+              status: 'iOS',
+            },
           },
         },
-      },
-    }}
-  />
+      }}
+    />
+  </PageHeaderWrapper>
 );
