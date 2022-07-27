@@ -3,7 +3,7 @@ import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { ProList } from '@ant-design/pro-components';
-import { Button, Tag } from 'antd';
+import { Button, Tag, Image } from 'antd';
 import './index.less';
 
 const IconText = ({ icon, text }: { icon: any; text: string }) => (
@@ -121,7 +121,7 @@ const Reject: React.FC = (): React.ReactElement => {
             render: (item: { name: string; imgUrl: string }) => {
               return (
                 <>
-                  <img width={100} alt={item.name} src={item.imgUrl} />
+                  <Image width={100} alt={item.name} src={item.imgUrl} />
                 </>
               );
             },

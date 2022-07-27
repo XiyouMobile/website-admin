@@ -1,5 +1,6 @@
 import { ProList } from '@ant-design/pro-components';
 import { Button, Space, Tag } from 'antd';
+import { history } from 'umi';
 
 const dataSource = [
   {
@@ -28,11 +29,15 @@ const dataSource = [
   },
 ];
 
+const handle = () => {
+  history.push('/interview/create');
+};
+
 export default () => (
   <ProList<any>
     toolBarRender={() => {
       return [
-        <Button key="add" type="primary">
+        <Button key="add" type="primary" onClick={handle}>
           新建
         </Button>,
       ];

@@ -24,12 +24,16 @@ const handle = (record: any) => {
   history.push(`/interview/list/id=${id}`);
 };
 
+const handleNew = () => {
+  history.push('/interview/create');
+};
+
 export default () => (
   <ProList<GithubIssueItem>
     split={true}
     toolBarRender={() => {
       return [
-        <Button key="3" type="primary">
+        <Button key="3" type="primary" onClick={handleNew}>
           新建
         </Button>,
       ];
