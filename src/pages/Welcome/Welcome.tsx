@@ -1,6 +1,7 @@
 import { PageContainer } from '@ant-design/pro-layout';
 import { Card, Typography } from 'antd';
 import React from 'react';
+import { useModel } from 'umi';
 import styles from './Welcome.less';
 
 const CodePreview: React.FC = ({ children }) => (
@@ -12,6 +13,9 @@ const CodePreview: React.FC = ({ children }) => (
 );
 
 const Welcome: React.FC = () => {
+  const { initialState } = useModel('@@initialState');
+  console.log(initialState);
+
   return (
     <PageContainer>
       <Card>

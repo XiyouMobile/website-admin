@@ -2,7 +2,7 @@ import React from 'react';
 import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { ProList } from '@ant-design/pro-components';
-import { Button, Tag, notification } from 'antd';
+import { Button, Tag, notification, Image } from 'antd';
 import './index.less';
 
 const dataSource = [
@@ -104,7 +104,7 @@ const Reject: React.FC = (): React.ReactElement => {
             render: (item: { name: string; imgUrl: string }) => {
               return (
                 <>
-                  <img width={100} alt={item.name} src={item.imgUrl} />
+                  <Image width={100} alt={item.name} src={item.imgUrl} />
                 </>
               );
             },

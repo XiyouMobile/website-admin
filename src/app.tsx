@@ -12,6 +12,13 @@ import 'md-editor-rt/lib/style.css';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
+interface initial {
+  settings?: Partial<LayoutSettings>;
+  currentUser?: API.CurrentUser;
+  loading?: boolean;
+  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+}
+
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -20,19 +27,14 @@ export const initialStateConfig = {
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
-export async function getInitialState(): Promise<{
-  settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
-}> {
+export async function getInitialState(): Promise<initial> {
   const fetchUserInfo = async () => {
     try {
       const msg = await queryCurrentUser();
       console.log(msg);
       const a = {
         name: '黄欲烈',
-        access: 'admin',
+        access: 'user',
       };
 
       return a;
