@@ -138,13 +138,13 @@ export default [
       { component: './404' },
     ],
   },
-  { path: '/mine', name: '个人中心', icon: 'heart', component: './user/Myself/Myself' },
+  { path: '/mine', name: '个人中心', icon: 'heart', component: '@/pages/user/Myself/Myself' },
   {
     name: '设置',
     icon: 'setting',
     path: '/setting',
     routes: [
-      { path: 'modify', name: '个人设置', icon: 'smile', component: './setting/index' },
+      { path: 'modify', name: '个人设置', icon: 'smile', component: '@/pages/setting/index' },
       { component: './404' },
     ],
   },
