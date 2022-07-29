@@ -77,11 +77,18 @@ export default [
           { component: './404' },
         ],
       },
+      {
+        path: 'money',
+        name: '捐款管理',
+        icon: 'icon-viewlarger1',
+        routes: [
+          { path: 'list', name: '捐款列表', component: './admin/Money/index' },
+          { component: './404' },
+        ],
+      },
       { component: './404' },
     ],
   },
-
-  { name: '查询表格', icon: 'table', path: '/list', component: './TableList' },
   {
     name: 'wiki',
     icon: 'book',
