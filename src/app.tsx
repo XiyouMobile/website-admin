@@ -8,6 +8,7 @@ import { history, Link } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { currentUser as queryCurrentUser } from './api/request/member/api';
 import 'md-editor-rt/lib/style.css';
+import { message } from 'antd';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -16,6 +17,7 @@ interface initial {
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
+  token?: string;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }
 
@@ -34,11 +36,14 @@ export async function getInitialState(): Promise<initial> {
       console.log(msg);
       const a = {
         name: '黄欲烈',
-        access: 'user',
+        access: 'admin',
       };
 
       return a;
     } catch (error) {
+      // console.log('12312443');
+
+      message.error('请先登录');
       history.push(loginPath);
     }
     return undefined;
