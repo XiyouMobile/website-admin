@@ -1,9 +1,11 @@
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Card, Button, Form, Input, Upload } from 'antd';
+import { Card, Button, Form, Input, Upload, Select } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import React, { useState } from 'react';
 import './index.less';
+
+const { Option } = Select;
 
 const Index: React.FC = (): React.ReactElement => {
   const onFinish = (values: any) => {
@@ -42,6 +44,10 @@ const Index: React.FC = (): React.ReactElement => {
     imgWindow?.document.write(image.outerHTML);
   };
 
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
   return (
     <PageHeaderWrapper>
       <Card title="个人设置">
@@ -49,12 +55,13 @@ const Index: React.FC = (): React.ReactElement => {
           <Form
             name="basic"
             initialValues={{ remember: true }}
+            labelCol={{ span: 8 }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
-              label="Username"
+              label="姓名"
               name="username"
               rules={[{ required: true, message: 'Please input your username!' }]}
             >
@@ -62,42 +69,63 @@ const Index: React.FC = (): React.ReactElement => {
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label="班级"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="Password"
+              label="组别"
+              name="password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+              <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="disabled" disabled>
+                  Disabled
+                </Option>
+                <Option value="Yiminghe">yiminghe</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="性别"
+              name="password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+              <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="disabled" disabled>
+                  Disabled
+                </Option>
+                <Option value="Yiminghe">yiminghe</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="电话"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              label="Password"
+              label="入学时间"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
-              <Input />
+              <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="disabled" disabled>
+                  Disabled
+                </Option>
+                <Option value="Yiminghe">yiminghe</Option>
+              </Select>
             </Form.Item>
             <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Password"
+              label="个人头像"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
@@ -114,7 +142,7 @@ const Index: React.FC = (): React.ReactElement => {
               </ImgCrop>
             </Form.Item>
             <Form.Item
-              label="Password"
+              label="风采照"
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >

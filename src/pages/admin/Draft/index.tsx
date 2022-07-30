@@ -1,17 +1,10 @@
 import React from 'react';
 import { history } from 'umi';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { ProList } from '@ant-design/pro-components';
 import { Button, Tag, Image } from 'antd';
 import './index.less';
 
-const IconText = ({ icon, text }: { icon: any; text: string }) => (
-  <span>
-    {React.createElement(icon, { style: { marginRight: 8 } })}
-    {text}
-  </span>
-);
 const dataSource = [
   {
     id: '1331',
@@ -24,7 +17,6 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已通过',
     },
     actions: {
       stars: 5,
@@ -43,7 +35,6 @@ const dataSource = [
     description: {
       username: '黄欲烈',
       group: 'web',
-      state: '已通过',
     },
     actions: {
       stars: 5,
@@ -53,17 +44,18 @@ const dataSource = [
   },
 ];
 
-const NewPage: React.FC = (): React.ReactElement => {
+const Draft: React.FC = (): React.ReactElement => {
   const HandleOnClick = () => {
     history.push('/admin/dynamic/create');
   };
 
   const handle = (e: any) => {
     const { id } = e;
-    history.push(`/admin/dynamic/list/id=${id}`);
+    history.push(`/admin/dynamic/draft/id=${id}`);
   };
+
   return (
-    <PageHeaderWrapper content={' 这个页面只有 admin 权限才能查看'}>
+    <PageHeaderWrapper>
       <ProList
         split={true}
         pagination={{
@@ -81,7 +73,7 @@ const NewPage: React.FC = (): React.ReactElement => {
         }}
         itemLayout="vertical"
         rowKey="id"
-        headerTitle="我的文章"
+        headerTitle="我的草稿"
         dataSource={dataSource}
         onItem={(record: any) => {
           return {
@@ -97,24 +89,8 @@ const NewPage: React.FC = (): React.ReactElement => {
               <>
                 <Tag>{item.username}</Tag>
                 <Tag>{item.group}</Tag>
-                <Tag color="green">{item.state}</Tag>
               </>
             ),
-          },
-          actions: {
-            render: (item: any) => {
-              const { stars, favorites, comments } = item.props.text;
-              return (
-                <>
-                  <IconText icon={StarOutlined} text={stars} key="list-vertical-star-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={LikeOutlined} text={favorites} key="list-vertical-like-o" />
-                  &nbsp; &nbsp; &nbsp;
-                  <IconText icon={MessageOutlined} text={comments} key="list-vertical-message" />
-                  &nbsp; &nbsp; &nbsp;
-                </>
-              );
-            },
           },
           extra: {
             render: (item: { name: string; imgUrl: string }) => {
@@ -136,4 +112,4 @@ const NewPage: React.FC = (): React.ReactElement => {
   );
 };
 
-export default NewPage;
+export default Draft;
