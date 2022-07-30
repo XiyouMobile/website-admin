@@ -82,6 +82,5 @@ src 下分为 pages(所有页面相关文件),component(公共组件相关文件
 
 <3>预计后天完成管理端所有功能
 
-@[TOC](CSS盒子模型目录)
-
-<hr style=" border:solid; width:100px; height:1px;" color=#000000 size=1">
+## 7 月 30 日
+<1>完成所有功能,等待后台接口....
