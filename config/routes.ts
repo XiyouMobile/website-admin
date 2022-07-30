@@ -58,11 +58,27 @@ export default [
         icon: 'crown',
         routes: [
           { path: 'list', name: '动态列表', icon: 'smile', component: './admin/Dynamic/index' },
+          { path: 'draft', name: '草稿箱', icon: 'smile', component: './admin/Draft/index' },
+
           {
             path: 'create',
             name: '新建动态',
             icon: 'smile',
             component: './admin/NewDynamic/index',
+          },
+          {
+            path: 'list/:id',
+            name: '动态详情',
+            icon: 'smile',
+            component: './admin/Dynamic_back/index',
+            hideInMenu: true,
+          },
+          {
+            path: 'draft/:id',
+            name: '动态详情',
+            icon: 'smile',
+            component: './admin/Draft_back/index',
+            hideInMenu: true,
           },
           { component: './404' },
         ],

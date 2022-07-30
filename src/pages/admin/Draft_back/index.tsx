@@ -1,13 +1,16 @@
 import { useRef, useState } from 'react';
-import { Form, Input, message, Modal, Button, Upload } from 'antd';
+import { useLocation } from 'react-router-dom';
+import { Form, Input, message, Modal, Radio, Button, Upload } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import MdEditor from 'md-editor-rt';
+import { history } from 'umi';
 import ImgCrop from 'antd-img-crop';
+
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import axios from 'axios';
 import EmojiExtension from '../../../components/EmojiExtension/index';
 import ReadExtension from '../../../components/ReadExtension/index';
-import moment from 'moment';
+import type { RadioChangeEvent } from 'antd';
 import 'md-editor-rt/lib/style.css';
 import './index.less';
 
@@ -20,14 +23,14 @@ interface IFrom {
 }
 
 const Wiki: React.FC = (): React.ReactElement => {
+  const Location = useLocation();
+
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible_delete, setIsModalisModalVisible_delete] = useState(false);
   const FormRef: any = useRef();
-
   const editorId = 'editor-preview';
-
-  // const myRef: any = useRef();
-
   const [text, setText] = useState('hello md-editor-rt');
+  const [type, setType] = useState('Web');
   const [des, setDes] = useState('无');
   const [fileList, setFileList] = useState<UploadFile[]>([
     {
@@ -43,9 +46,9 @@ const Wiki: React.FC = (): React.ReactElement => {
     const data: IFrom = {
       ...values,
       text: text,
+      type: type,
       des: des,
       imgUrl: 'http://xiyoustudent.cn:4000/img/img-1653223987608.jpg',
-      date: moment().format('YYYY年MM月DD日 HH:mm:ss'),
     };
     if (flag) {
       console.log('提交');
@@ -85,10 +88,13 @@ const Wiki: React.FC = (): React.ReactElement => {
     setIsModalVisible(false);
   };
 
+  const onChange = (e: RadioChangeEvent) => {
+    setType(e.target.value);
+  };
+
   const onChangeText = (e: any) => {
     setDes(e.target.value);
   };
-
   // 图片上传
   const onUploadImg = async (files: any, callback: any) => {
     const res = await Promise.all(
@@ -135,6 +141,25 @@ const Wiki: React.FC = (): React.ReactElement => {
     imgWindow?.document.write(image.outerHTML);
   };
 
+  const showback = () => {
+    history.push('/admin/dynamic/draft');
+  };
+
+  const ShowDelete = () => {
+    setIsModalisModalVisible_delete(true);
+  };
+
+  const handleOk_delete = () => {
+    const arr = Location.pathname.split('/');
+    const brr = arr[3].split('=');
+    console.log(brr[1]);
+    setIsModalisModalVisible_delete(false);
+  };
+
+  const handleCancel_delete = () => {
+    setIsModalisModalVisible_delete(false);
+  };
+
   return (
     <PageHeaderWrapper>
       <Form
@@ -147,8 +172,14 @@ const Wiki: React.FC = (): React.ReactElement => {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item>
+          <Button size="large" onClick={showback}>
+            返回
+          </Button>
           <Button size="large" id="wiki_button" onClick={showModal}>
             发布
+          </Button>
+          <Button size="large" id="draft_button" onClick={ShowDelete} type="primary" danger>
+            删除
           </Button>
         </Form.Item>
         <Form.Item
@@ -226,6 +257,15 @@ const Wiki: React.FC = (): React.ReactElement => {
           </>
         }
       >
+        文章类型：
+        <br />
+        <Radio.Group onChange={onChange} defaultValue="Web">
+          <Radio.Button value="Web">Web</Radio.Button>
+          <Radio.Button value="iOS">iOS</Radio.Button>
+          <Radio.Button value="Android">Android</Radio.Button>
+          <Radio.Button value="Server">Server</Radio.Button>
+        </Radio.Group>
+        <br />
         封面:
         <ImgCrop rotate>
           <Upload
@@ -243,7 +283,14 @@ const Wiki: React.FC = (): React.ReactElement => {
         描述:
         <Input placeholder="不多于100个字" onChange={onChangeText} />
       </Modal>
-      {/* <MdEditor previewOnly modelValue={text} previewTheme="cyanosis" className="md5" /> */}
+      <Modal
+        title="删除"
+        visible={isModalVisible_delete}
+        onOk={handleOk_delete}
+        onCancel={handleCancel_delete}
+      >
+        <p>你确定删除这篇草稿吗？</p>
+      </Modal>
     </PageHeaderWrapper>
   );
 };
